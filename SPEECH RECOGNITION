@@ -1,0 +1,32 @@
+//AUDIO TO TEXT:
+import speech_recognition
+import pyttsx3
+recognizer= speech_recognition.Recognizer()
+while True:
+  try:
+      with speech_recognition.Microphone() as mic:
+          recognizer.adjust_for_ambient_noise(mic,duration=0.2)
+          print("speak")
+          audio = recognizer.listen(mic)
+          text = recognizer.recognize_google(audio,language="en-US")
+          text=text.lower()
+          print(f"Recognized {text}")
+  except:
+      pass
+
+//TEXT TO AUDIO:
+import pyttsx3
+engine = pyttsx3.init()
+voices = engine.getProperty('voices')
+engine.setProperty('voice', voices[1].id)
+# print(voices[1].id)
+engine.setProperty('rate', 150)
+# engine.say("Hello, How are you ?")
+engine.runAndWait()
+
+def speak(str):
+    engine.say(str)
+    engine.runAndWait()
+
+speak("Hello, What's going on")
+
